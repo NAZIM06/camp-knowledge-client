@@ -6,9 +6,9 @@ const Footer = () => {
     return (
         <footer className="footer p-3 bg-blue-900 text-white  flex flex-col  md:flex-row items-center justify-around">
         <div className="flex items-center">
-          <img src="https://www.freepnglogos.com/uploads/tesla-logo-png-27.png" alt="Logo" className="w-12 h-12 mr-2" />
+          <img src="https://i.ibb.co/1Jj7wZY/png-transparent-act-sat-reading-computer-icons-reading-child-text-reading-removebg-preview.png" alt="Logo" className="w-18 h-12" />
           <Link to="/" className="text-white text-4xl font-bold">
-            Toytopia
+            CampKnowledge
           </Link>
         </div>
         <div className="">

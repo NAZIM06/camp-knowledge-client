@@ -31,7 +31,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
-                        <img src="https://www.nicepng.com/png/detail/61-613147_education-logo-element-reading-book-education-logo-icon.png" alt="Logo" className="w-16 h-12" />
+                        <img src="https://i.ibb.co/1Jj7wZY/png-transparent-act-sat-reading-computer-icons-reading-child-text-reading-removebg-preview.png" alt="Logo" className="w-18 h-12" />
                         <Link to="/" className="text-blue-900 text-4xl font-bold">
                             CampKnowledge
                         </Link>
