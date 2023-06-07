@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active{
+    @apply font-bold tracking-wide text-blue-800 transition-colors duration-200
+  }
+  
+  .default{
+    @apply font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-400
+  }
+  .my-container{
+    @apply px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24  lg:py-20
+  }
+  .button{
+  @apply inline-flex items-center h-12 px-6 my-3 font-medium text-white transition duration-200 rounded shadow-md bg-blue-400 hover:bg-blue-600
+}

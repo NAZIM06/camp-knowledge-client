@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiOutlineUserCircle } from "react-icons/hi";
+
 import Tools from "./Tools";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
 
 
 const Navbar = () => {
@@ -30,9 +31,9 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
-                        <img src="https://www.freepnglogos.com/uploads/tesla-logo-png-27.png" alt="Logo" className="w-12 h-12 mr-2" />
+                        <img src="https://www.nicepng.com/png/detail/61-613147_education-logo-element-reading-book-education-logo-icon.png" alt="Logo" className="w-16 h-12" />
                         <Link to="/" className="text-blue-900 text-4xl font-bold">
-                            Toytopia
+                            CampKnowledge
                         </Link>
                     </div>
 
@@ -42,18 +43,18 @@ const Navbar = () => {
                             <NavLink to="/" className="text-gray-500">
                                 Home
                             </NavLink>
-                            <NavLink to="/all-toys" className="text-gray-500">
-                                All Toys
+                            <NavLink to="/" className="text-gray-500">
+                            Instructors
+                            </NavLink>
+                            <NavLink to="/" className=" text-gray-500">
+                            Classes
                             </NavLink>
                             {user &&
                                 <>
-                                    <NavLink to={'/my-toys'} className="text-gray-500">My Toys</NavLink>
-                                    <NavLink to={'/add-toy'} className="text-gray-500">Add a toy</NavLink>
+                                    <NavLink to={'/'} className="text-gray-500">Dashboard</NavLink>
                                 </>
                             }
-                            <NavLink to="/blog" className=" text-gray-500">
-                                Blog
-                            </NavLink>
+                            
                             {
                                 user ? <div className='flex items-center space-x-2 md:space-x-4'>
                                     <Tools text={user.displayName}>{user.photoURL ? <img className='rounded-full h-6 w-6' src={user.photoURL} alt="" /> : <HiOutlineUserCircle className='h-8 w-8' />}</Tools>

@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom';
-// import Header from '../Pages/Shared/Header';
-// import Footer from '../Pages/Shared/Footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '../pages/Shared/Navbar';
+import Footer from '../pages/Shared/Footer';
 
 
 const Main = () => {
     return (
         <>
-            {/* <Header></Header> */}
+            <Navbar></Navbar>
             <Outlet></Outlet>
             <ToastContainer
                 position="top-center"
@@ -22,7 +22,7 @@ const Main = () => {
                 pauseOnHover
                 theme="light"
             />
-            {/* <Footer /> */}
+          <Footer></Footer>
         </>
     );
 };
