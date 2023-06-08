@@ -110,7 +110,7 @@ const Register = () => {
                     {passwordError && <p className='text-red-800 -mt-2 mb-2'>{passwordError}</p>}
                     <label className='text-xl font-semibold mb-3'>Photo Url</label>
                     <input type="file" className="file-input file-input-bordered w-full mb-3" {...register('photo')} />
-                    <p className='text-center p-3'>Already have an account? <Link to='/login'><span className='text-btn-color underline'>Login</span></Link></p>
+                    <p className='text-center p-3'>Already have an account? <Link to='/login'><span className='text-btn-color underline text-blue-800'>Login</span></Link></p>
                     <p className='text-red-800 py-3'>{error}</p>
                     <button type='submit' className='button mx-auto flex justify-center w-full'>Register</button>
                 </form>

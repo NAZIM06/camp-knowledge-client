@@ -12,12 +12,12 @@ const Footer = () => {
           </Link>
         </div>
         <div className="">
-          <p>Address: 49/2 Toytopia Street,Dhaka City</p>
+          <p>Address: 49/2 CK Street,Dhaka City</p>
           <p>
             Important Links:{" "}
-            <Link to="/my-toys">My Toys</Link> |{" "}
-            <Link to="/all-toys">All Toys</Link> |{" "}
-            <Link to="/blog">Blog</Link>
+            <Link to="/my-toys">Instractors</Link> |{" "}
+            <Link to="/all-toys">Classes</Link> |{" "}
+            <Link to="/blog">Dashboard</Link>
           </p>
         </div>
         <div>
@@ -41,7 +41,7 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <p>&copy; 2023 - All rights reserved by Toytopia</p>
+          <p>&copy; 2023 - All rights reserved by Campknowledge</p>
         </div>
       </footer>
       

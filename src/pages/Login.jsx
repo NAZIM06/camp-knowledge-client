@@ -72,7 +72,7 @@ const Login = () => {
                         </div>
                     </div>
                     {errors?.password?.type === 'required' && <p className='text-red-800 mb-2'>This field is required</p>}
-                    <p className='text-center p-3'>Don't have an account? <Link to='/register'><span className='text-btn-color underline'>Register</span></Link></p>
+                    <p className='text-center p-3'>Don't have an account? <Link to='/register'><span className='text-btn-color text-blue-800 underline'>Register</span></Link></p>
                     <p className='text-red-800 py-3'>{error}</p>
                     <button type='submit' className='button mx-auto flex justify-center w-full'>Login</button>
                 </form>
