@@ -5,6 +5,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
+import { FcGoogle } from 'react-icons/fc';
 
 const Register = () => {
     const [show, setShow] = useState(false)
@@ -13,9 +14,19 @@ const Register = () => {
     const [passwordError, setPasswordError] = useState('')
     const [photoUrl, setPhotoUrl] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, createUser, setUser, loading, setLoading, updateUser } = useContext(AuthContext);
+    const { user, createUser, setUser, loading, setLoading, updateUser,googleSignInUser } = useContext(AuthContext);
 
-
+    const handleGoogleSignIn = () => {
+        googleSignInUser()
+            .then(result => {
+                setUser(result.user)
+                setLoading(false)
+            })
+            .catch(err => {
+                console.log(err.message)
+                setLoading(false)
+            })
+    }
     const onSubmit = async data => {
         if(data.password !== data.confirmPassword){
             setPasswordError('Password did not match. Try again')
@@ -68,7 +79,7 @@ const Register = () => {
             {
                 loading && <Loader />
             }
-            <div className='mx-auto p-10 w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-2/6'>
+            <div className='mx-auto p-10 w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-3/6'>
             <form className='p-10 bg-base-200 rounded-xl border-2' onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col mb-4">
                     <label className='text-xl font-semibold mb-3'>Name</label>
@@ -103,6 +114,10 @@ const Register = () => {
                     <p className='text-red-800 py-3'>{error}</p>
                     <button type='submit' className='button mx-auto flex justify-center w-full'>Register</button>
                 </form>
+                <div onClick={handleGoogleSignIn} className='my-5 flex w-10/12 sm:w-full  mx-auto p-2 justify-between items-center hover:bg-black hover:text-white cursor-pointer border-2'>
+                    <FcGoogle className='h-6 w-6' />
+                    <p className='font-semibold mx-auto'>Continue with Google</p>
+                </div>
             </div>
 
         </>
