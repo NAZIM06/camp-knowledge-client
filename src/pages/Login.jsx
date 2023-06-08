@@ -76,7 +76,7 @@ const Login = () => {
                     <p className='text-red-800 py-3'>{error}</p>
                     <button type='submit' className='button mx-auto flex justify-center w-full'>Login</button>
                 </form>
-                <div onClick={handleGoogleSignIn} className='my-5 flex w-10/12 sm:w-full rounded-3xl mx-auto p-2 justify-between items-center hover:bg-[#121212] hover:text-white cursor-pointer border-2'>
+                <div onClick={handleGoogleSignIn} className='my-5 flex w-10/12 sm:w-full rounded-3xl mx-auto p-2 justify-between items-center hover:bg-black hover:text-white cursor-pointer border-2'>
                     <FcGoogle className='h-6 w-6' />
                     <p className='font-semibold mx-auto'>Continue with Google</p>
                 </div>
