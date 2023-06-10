@@ -5,7 +5,8 @@ import { AuthContext } from '../provider/AuthProvider';
 import Loader from './Shared/Loader';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { Helmet } from "react-helmet";
+import axios from 'axios';
 
 const Login = () => {
     const { signInUser, loading, setLoading, googleSignInUser, setUser } = useContext(AuthContext);
@@ -34,24 +35,23 @@ const Login = () => {
                 console.log(errorMessage);
             });
     };
-
     const handleGoogleSignIn = () => {
-        if (!show) { // Prevent executing when the eye icon is clicked
-            googleSignInUser()
-                .then(result => {
-                    setUser(result.user);
-                    setLoading(false);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                    setLoading(false);
-                });
-        }
-    };
-
-    const togglePasswordVisibility = () => {
-        setShow(!show);
-    };
+        googleSignInUser()
+            .then(result => {
+                const user = result.user
+                const savedUser = { name: user.displayName, email: user.email, role: 'student' }
+                axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
+                setUser(user)
+                setLoading(false)
+            })
+            .catch(err => {
+                if (err.message === 'Firebase: Error (auth/popup-closed-by-user).') {
+                    setLoading(false)
+                }
+                console.log(err.message)
+                setLoading(false)
+            })
+    }
 
     return (
         <>
@@ -59,11 +59,11 @@ const Login = () => {
                 loading && <Loader />
             }
             <div className='mx-auto p-10 w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-2/6'>
-            <form className='p-10 bg-base-200 rounded-xl border-2' onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col mb-4"> <label className='text-xl font-semibold mb-3'>Email</label>
-                    <input placeholder='Email' className='mb-5 p-3 focus:outline-none' {...register('email', { required: true })} />
-                    {errors?.email?.type === 'required' && <p className='text-red-800 mb-2'>This field is required</p>}</div>
-                   
+                <form className='p-10 bg-base-200 rounded-xl border-2' onSubmit={handleSubmit(onSubmit)}>
+                    <div className="flex flex-col mb-4"> <label className='text-xl font-semibold mb-3'>Email</label>
+                        <input placeholder='Email' className='mb-5 p-3 focus:outline-none' {...register('email', { required: true })} />
+                        {errors?.email?.type === 'required' && <p className='text-red-800 mb-2'>This field is required</p>}</div>
+
                     <label className='text-xl font-semibold mb-3'>Password</label>
                     <div className='relative w-full'>
                         <input placeholder='Password' className='mb-5 w-full p-3 focus:outline-none' type={show ? 'text' : 'password'} {...register('password', { required: true })} />

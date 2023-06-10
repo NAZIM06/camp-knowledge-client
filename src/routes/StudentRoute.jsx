@@ -1,8 +1,7 @@
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import Loader from '../Pages/Shared/Loader/Loader';
-import { useAuth } from '../Hooks/useAuth';
-import { useStudent } from '../Hooks/useStudent';
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../components/Hooks/useAuth";
+import { useStudent } from "../components/Hooks/useStudent";
+import Loader from "../pages/Shared/Loader";
 
 const StudentRoute = ({children}) => {
     const {user, loading} = useAuth()

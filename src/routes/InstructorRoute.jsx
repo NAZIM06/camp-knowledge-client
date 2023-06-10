@@ -1,8 +1,7 @@
-import React from 'react';
-import { useAuth } from '../Hooks/useAuth';
-import { Navigate, useLocation } from 'react-router-dom';
-import Loader from '../Pages/Shared/Loader/Loader';
-import { useInstructor } from '../Hooks/useInstructor';
+import { Navigate, useLocation } from "react-router-dom"
+import { useAuth } from "../components/Hooks/useAuth"
+import { useInstructor } from "../components/Hooks/useInstructor"
+import Loader from "../pages/Shared/Loader"
 
 const InstructorRoute = ({children}) => {
     const {user, loading} = useAuth()

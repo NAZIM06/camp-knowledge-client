@@ -1,11 +1,12 @@
-import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Loader from './Shared/Loader';
-import { AuthContext } from '../provider/AuthProvider';
-import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import { FcGoogle } from 'react-icons/fc';
+import axios from 'axios';
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../provider/AuthProvider";
+import Loader from "./Shared/Loader";
+import { Link } from "react-router-dom";
 
 const Register = () => {
     const [show, setShow] = useState(false)
@@ -19,15 +20,24 @@ const Register = () => {
     const handleGoogleSignIn = () => {
         googleSignInUser()
             .then(result => {
+                const user = result.user
+                const savedUser = {name: user.displayName ,email: user.email, role: 'student'}
+                axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
                 setUser(result.user)
                 setLoading(false)
             })
             .catch(err => {
+                if(err.message === 'Firebase: Error (auth/popup-closed-by-user).'){
+                    setLoading(false)
+                }
                 console.log(err.message)
                 setLoading(false)
             })
     }
     const onSubmit = async data => {
+        const name = data.name;
+        const password = data.password;
+        const email = data.email;
         if(data.password !== data.confirmPassword){
             setPasswordError('Password did not match. Try again')
             return;
@@ -42,37 +52,37 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.success) {
-                    setPhotoUrl(data.data.display_url)
-                }
-            })
-
-        await createUser(data.email, data.password)
-            .then((result) => {
-                const user = result.user;
-                updateUser(data.name, photoUrl)
-                    .then(() => {
+                const imageUrl = data.data.display_url
+                createUser(email, password)
+                .then((result) => {
+                    const user = result.user;
+                    updateUserProfile(name, imageUrl)
+                        .then(() => {
+                            setLoading(false)
+                         })
+                        .catch((err) => {
+                            const errorMessage = err.message;
+                            setLoading(false)
+                            console.log(errorMessage);
+                        });
+                        const savedUser = {name: data.name ,email: user.email, role: 'student'}
+                        axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
+                })
+                .catch((err) => {
+                    const errorMessage = err.message;
+                    if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
+                        setError('Please input a valid email address');
                         setLoading(false)
-                     })
-                    .catch((err) => {
-                        const errorMessage = err.message;
+                    } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+                        setError('This email already exists. Please login');
                         setLoading(false)
-                        console.log(errorMessage);
-                    });
+                    } else if(errorMessage === 'Firebase: Error (auth/popup-closed-by-user).'){
+                        setLoading(false)
+                    }
+                    console.log(errorMessage);
+                });
             })
-            .catch((err) => {
-                const errorMessage = err.message;
-                if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
-                    setError('Please input a valid email address');
-                    setLoading(false)
-                } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
-                    setError('This email already exists. Please login');
-                    setLoading(false)
-                }
-                console.log(errorMessage);
-            });
     }
-   
 
     return (
         <>

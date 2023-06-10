@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { useAuth } from '../Hooks/useAuth';
+import { useEffect, useState } from "react";
+import { useAuth } from "../components/Hooks/useAuth";
+import axios from "axios";
+import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
     const {user, loading} = useAuth();
@@ -13,7 +13,6 @@ const Dashboard = () => {
             setCurrentUser(res.data)
         })
     },[])
-    // console.log(currentUser)
 
     return (
         <div className="drawer lg:drawer-open">
