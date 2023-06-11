@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import Tools from "./Tools";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Navbar = () => {
+  const location = useLocation()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOutUser } = useContext(AuthContext);
 
@@ -139,18 +140,18 @@ const Navbar = () => {
               Home
             </NavLink>
             <NavLink
-              to="/"
+              to="/instructors"
               className="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-gray-700"
             >
               Instructors
             </NavLink>
             <NavLink
-              to="/"
+              to="/classes"
               className="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-gray-700"
             >
               Classes
             </NavLink>
-            {user && <NavLink to={'/'} className="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-gray-700">Dashboard</NavLink>}
+            {user && <NavLink to={'/dashboard'} className="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-gray-700">Dashboard</NavLink>}
           </div>
         </div>
       )}

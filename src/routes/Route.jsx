@@ -20,8 +20,6 @@ import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledCl
 import MySelectedClasses from "../pages/Dashboard/MySelectedClasses/MySelectedClasses";
 
 
-
-
 const route = createBrowserRouter([
     {
         path: '/',
