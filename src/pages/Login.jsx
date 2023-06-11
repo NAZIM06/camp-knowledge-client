@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../provider/AuthProvider';
@@ -7,52 +7,68 @@ import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { signInUser, loading, setLoading, googleSignInUser, setUser } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [show, setShow] = useState(false); // Updated initial state to false
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation()
+    const navigate = useNavigate();
+    const from = location.state?.form?.pathname || '/'
 
     const onSubmit = data => {
-        setError('');
+        
+        setError('')
 
         signInUser(data.email, data.password)
-            .then(result => {
-                const user = result.user;
-                setLoading(false);
+        .then(result =>{
+            const user = result.user;
+            Swal.fire({
+                icon: 'success',
+                text: 'Login Successfully',
             })
-            .catch(err => {
-                const errorMessage = err.message;
-                if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
-                    setError('Please Input a valid email address');
-                    setLoading(false);
-                } else if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
-                    setError('wrong password. Please try again');
-                    setLoading(false);
-                }
+            navigate(from, {replace : true});
+            setLoading(false)
+            reset()
+        })
+        .catch(err =>{
+            const errorMessage = err.message
+            if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
+                setError('Please Input a valid email address')
+                setLoading(false)
+            } else if (errorMessage === 'Firebase: Error (auth/wrong-password).'){
+                setError('wrong password. Please try again')
+                setLoading(false)
+            }
 
-                console.log(errorMessage);
-            });
-    };
-    const handleGoogleSignIn = () => {
-        googleSignInUser()
-            .then(result => {
+            console.log(errorMessage)
+        })
+    }
+        const handleGoogleSignIn = () =>{
+            googleSignInUser()
+            .then(result =>{
                 const user = result.user
-                const savedUser = { name: user.displayName, email: user.email, role: 'student' }
+                const savedUser = {name: user.displayName ,email: user.email, image: user.photoURL, role: 'student'}
                 axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
                 setUser(user)
                 setLoading(false)
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Login Successfully',
+                  })
+                navigate(from, {replace : true});
             })
-            .catch(err => {
-                if (err.message === 'Firebase: Error (auth/popup-closed-by-user).') {
+            .catch(err =>{
+                if(err.message === 'Firebase: Error (auth/popup-closed-by-user).'){
                     setLoading(false)
                 }
                 console.log(err.message)
                 setLoading(false)
             })
-    }
-
+        }
+    
     return (
         <>
             {
@@ -67,7 +83,7 @@ const Login = () => {
                     <label className='text-xl font-semibold mb-3'>Password</label>
                     <div className='relative w-full'>
                         <input placeholder='Password' className='mb-5 w-full p-3 focus:outline-none' type={show ? 'text' : 'password'} {...register('password', { required: true })} />
-                        <div onClick={togglePasswordVisibility} className='absolute inset-y-0 right-3 top-3.5'>
+                        <div onClick={() => setShow(!show)} className='absolute inset-y-0 right-3 top-3.5'>
                             {show ? <FaEye className='w-5 h-5' /> : <FaEyeSlash className='w-5 h-5' />}
                         </div>
                     </div>

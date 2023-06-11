@@ -71,13 +71,13 @@ const Navbar = () => {
               <NavLink to="/" className="text-gray-500">
                 Home
               </NavLink>
-              <NavLink to="/" className="text-gray-500">
+              <NavLink to="/instructors" className="text-gray-500">
                 Instructors
               </NavLink>
-              <NavLink to="/" className="text-gray-500">
+              <NavLink to="/classes" className="text-gray-500">
                 Classes
               </NavLink>
-              {user && <NavLink to={'/'} className="text-gray-500">Dashboard</NavLink>}
+              {user && <NavLink to={'/dashboard'} className="text-gray-500">Dashboard</NavLink>}
               {renderAuthButtons()}
             </div>
           </div>
