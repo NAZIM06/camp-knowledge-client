@@ -2,19 +2,23 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { FaPencilAlt } from 'react-icons/fa';
 import { useAuth } from '../../../components/Hooks/useAuth';
-
+import { Helmet } from 'react-helmet';
 
 const MyClasses = () => {
     const { user } = useAuth()
     const { data: allClasses = [] } = useQuery({
         queryKey: ['my-classes'],
         queryFn: async () => {
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/all-classes?email=${user?.email}`)
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/all-classes/${user?.email}`)
             return response.data
         }
     })
 
     return (
+        <>
+        <Helmet>
+                <title>Camp Knowledge || My Classes</title>
+            </Helmet>
         <div className='w-11/12 py-10 px-5 bg-base-300 shadow-2xl my-10'>
             <p className='text-3xl font-bold my-5 text-center'>My Classes : {allClasses.length}</p>
             <div className="overflow-x-auto">
@@ -30,7 +34,7 @@ const MyClasses = () => {
                             <th>Total Enrolled Students</th>
                             <th>Feedback</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,6 +63,7 @@ const MyClasses = () => {
                 </table>
             </div>
         </div>
+        </>
     );
 };
 

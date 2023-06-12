@@ -23,14 +23,14 @@ import MySelectedClasses from "../pages/Dashboard/MySelectedClasses/MySelectedCl
 const route = createBrowserRouter([
     {
         path: '/',
-        element: <Main/>,
+        element: <Main />,
         errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
                 element: <Home />
             },
-          
+
             {
                 path: 'login',
                 element: <Login />
@@ -39,14 +39,14 @@ const route = createBrowserRouter([
                 path: 'register',
                 element: <Register />
             },
-            
+
             {
                 path: 'instructors',
-                element: <Instructors/>
+                element: <Instructors />
             },
             {
                 path: 'classes',
-                element: <Classes/>
+                element: <Classes />
             },
             {
                 path: 'dashboard',
@@ -63,33 +63,33 @@ const route = createBrowserRouter([
                     },
                     {
                         path: 'manage-users',
-                        element: <AdminRoute><ManageUsers/></AdminRoute>
+                        element: <AdminRoute><ManageUsers /></AdminRoute>
                     },
                     {
                         path: 'manage-classes',
-                        element: <AdminRoute><ManageClasses/></AdminRoute>
+                        element: <AdminRoute><ManageClasses /></AdminRoute>
                     },
                     {
                         path: 'my-selected-classes',
-                        element: <StudentRoute><MySelectedClasses/></StudentRoute>
+                        element: <StudentRoute><MySelectedClasses /></StudentRoute>
                     },
                     {
                         path: 'payment/:id',
-                        element : <StudentRoute><Payment/></StudentRoute>,
-                        loader : ({params}) => fetch(`${import.meta.env.VITE_BASE_URL}/selected-class/${params.id}`) 
+                        element: <StudentRoute><Payment /></StudentRoute>,
+                        loader: ({ params }) => fetch(`${import.meta.env.VITE_BASE_URL}/selected-class/${params.id}`)
                     },
                     {
                         path: 'my-enrolled-classes',
-                        element: <StudentRoute><MyEnrolledClasses/></StudentRoute>
+                        element: <StudentRoute><MyEnrolledClasses /></StudentRoute>
                     },
                     {
                         path: 'payment-history',
-                        element: <StudentRoute><PaymentHistory/></StudentRoute>
+                        element: <StudentRoute><PaymentHistory /></StudentRoute>
                     }
                 ]
             }
-     
-      
+
+
         ]
     }
 ])

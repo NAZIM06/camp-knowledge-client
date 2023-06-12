@@ -14,21 +14,21 @@ const Register = () => {
     const [error, setError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, createUser, setUser, loading, setLoading, updateUser,googleSignInUser } = useContext(AuthContext);
+    const { user, createUser, setUser, loading, setLoading, updateUser, googleSignInUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = () => {
         googleSignInUser()
             .then(result => {
                 const user = result.user
-                const savedUser = {name: user.displayName ,email: user.email, image: user.photoURL, role: 'student'}
+                const savedUser = { name: user.displayName, email: user.email, image: user.photoURL, role: 'student' }
                 axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
                 setUser(result.user)
                 navigate('/')
                 setLoading(false)
             })
             .catch(err => {
-                if(err.message === 'Firebase: Error (auth/popup-closed-by-user).'){
+                if (err.message === 'Firebase: Error (auth/popup-closed-by-user).') {
                     setLoading(false)
                 }
                 console.log(err.message)
@@ -39,7 +39,7 @@ const handleGoogleSignIn = () => {
         const name = data.name;
         const password = data.password;
         const email = data.email;
-        if(data.password !== data.confirmPassword){
+        if (data.password !== data.confirmPassword) {
             setPasswordError('Password did not match. Try again')
             return;
         }
@@ -55,55 +55,55 @@ const handleGoogleSignIn = () => {
             .then(data => {
                 const imageUrl = data.data.display_url
                 createUser(email, password)
-                .then((result) => {
-                    const user = result.user;
-                    updateUser(name, imageUrl)
-                        .then(() => {
-                            Swal.fire({
-                                icon: 'success',
-                                text: 'Sign up Successfully',
-                              })
-                            navigate('/');
-                            setLoading(false)
-                         })
-                        .catch((err) => {
-                            const errorMessage = err.message;
-                            setLoading(false)
-                            console.log(errorMessage);
-                        });
-                        const savedUser = {name: name, email: user.email, image:imageUrl, role: 'student'}
+                    .then((result) => {
+                        const user = result.user;
+                        updateUser(name, imageUrl)
+                            .then(() => {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: 'Sign up Successfully',
+                                })
+                                navigate('/');
+                                setLoading(false)
+                            })
+                            .catch((err) => {
+                                const errorMessage = err.message;
+                                setLoading(false)
+                                console.log(errorMessage);
+                            });
+                        const savedUser = { name: name, email: user.email, image: imageUrl, role: 'student' }
                         axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
-                })
-                .catch((err) => {
-                    const errorMessage = err.message;
-                    if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
-                        setError('Please input a valid email address');
-                        setLoading(false)
-                    } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
-                        setError('This email already exists. Please login');
-                        setLoading(false)
-                    } else if(errorMessage === 'Firebase: Error (auth/popup-closed-by-user).'){
-                        setLoading(false)
-                    }
-                    console.log(errorMessage);
-                });
+                    })
+                    .catch((err) => {
+                        const errorMessage = err.message;
+                        if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
+                            setError('Please input a valid email address');
+                            setLoading(false)
+                        } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+                            setError('This email already exists. Please login');
+                            setLoading(false)
+                        } else if (errorMessage === 'Firebase: Error (auth/popup-closed-by-user).') {
+                            setLoading(false)
+                        }
+                        console.log(errorMessage);
+                    });
             })
     }
 
     return (
         <>
             <div className='mx-auto p-10 w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-3/6'>
-            {
-                loading && <Loader />
-            }
-            <form className='p-10 bg-base-200 rounded-xl border-2' onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col mb-4">
-            <label className='text-xl font-semibold mb-3 text-black'>Name</label>
-                    <input placeholder='Name' className='mb-5 p-3 focus:outline-none' {...register('name', {required:true})} />
-                    {errors?.name?.types === 'required' && <p className='text-red-800 mb-2'>Name is required</p>}
-                    <label className='text-xl font-semibold mb-3'>Email</label>
-                    <input placeholder='Email' className='mb-5 p-3 focus:outline-none' {...register('email', { required: true })} />
-                    {errors?.email?.types === 'required' && <p className='text-red-800 mb-2'>Email is required</p>}
+                {
+                    loading && <Loader />
+                }
+                <form className='p-10 bg-base-200 rounded-xl border-2' onSubmit={handleSubmit(onSubmit)}>
+                    <div className="flex flex-col mb-4">
+                        <label className='text-xl font-semibold mb-3 text-black'>Name</label>
+                        <input placeholder='Name' className='mb-5 p-3 focus:outline-none' {...register('name', { required: true })} />
+                        {errors?.name?.types === 'required' && <p className='text-red-800 mb-2'>Name is required</p>}
+                        <label className='text-xl font-semibold mb-3'>Email</label>
+                        <input placeholder='Email' className='mb-5 p-3 focus:outline-none' {...register('email', { required: true })} />
+                        {errors?.email?.types === 'required' && <p className='text-red-800 mb-2'>Email is required</p>}
                     </div>
                     <label className='text-xl font-semibold mb-3'>Password</label>
                     <div className='relative w-full'>
@@ -122,7 +122,7 @@ const handleGoogleSignIn = () => {
                             {showPass ? <FaEye className='w-5 h-5' /> : <FaEyeSlash className='w-5 h-5' />}
                         </div>
                     </div>
-                   {errors.confirmPassword?.type === 'required' && <p className='text-red-800 -mt-2 mb-2'>Password is required</p>}
+                    {errors.confirmPassword?.type === 'required' && <p className='text-red-800 -mt-2 mb-2'>Password is required</p>}
                     {errors.confirmPassword?.type === 'minLength' && <p className='text-red-800 -mt-2 mb-2'>Password must be at least 6 characters</p>}
                     {errors.confirmPassword?.type === 'pattern' && <p className='text-red-800 -mt-2 mb-2'>Password must have at least 1 capital letter and 1 special character</p>}
                     {passwordError && <p className='text-red-800 -mt-2 mb-2'>{passwordError}</p>}
@@ -132,7 +132,7 @@ const handleGoogleSignIn = () => {
                     <p className='text-red-800 py-3'>{error}</p>
                     <button type='submit' className='button mx-auto flex justify-center w-full'>Register</button>
                 </form>
-                
+
                 <div onClick={handleGoogleSignIn} className='my-5 flex w-10/12 sm:w-full  mx-auto p-2 justify-between items-center hover:bg-black hover:text-white cursor-pointer border-2'>
                     <FcGoogle className='h-6 w-6' />
                     <p className='font-semibold mx-auto'>Continue with Google</p>

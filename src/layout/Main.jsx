@@ -22,7 +22,7 @@ const Main = () => {
                 pauseOnHover
                 theme="light"
             />
-          <Footer></Footer>
+            <Footer></Footer>
         </>
     );
 };

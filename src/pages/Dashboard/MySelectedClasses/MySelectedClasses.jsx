@@ -15,7 +15,7 @@ const MySelectedClasses = () => {
             return response.data
         }
     })
-    // console.log(selectedClasses)
+  
     const handleDelete = (id) => {
         axios.delete(`${import.meta.env.VITE_BASE_URL}/selected-classes/${id}`)
             .then(res => {

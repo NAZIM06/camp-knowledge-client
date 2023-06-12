@@ -14,9 +14,9 @@ const CheckoutForm = ({ price, selectedClass }) => {
 
     useEffect(() => {
         console.log('Fetching clientSecret...');
-        axios.post(`${import.meta.env.VITE_BASE_URL}/create-payment-intent`, {price})
+        axios.post(`${import.meta.env.VITE_BASE_URL}/create-payment-intent`, { price })
             .then(res => {
-                // console.log(res.data.clientSecret);
+                
                 setClientSecret(res.data.clientSecret);
             })
             .catch((error) => {
@@ -71,19 +71,19 @@ const CheckoutForm = ({ price, selectedClass }) => {
                 date: new Date(),
                 price,
                 seats: 1,
-                classId : selectedClass.singleClass._id
+                classId: selectedClass.singleClass._id
 
             }
             axios.post(`${import.meta.env.VITE_BASE_URL}/payment`, payment)
-            .then(res =>{
-                console.log(res.data)
-                if(res.data.insertResult.acknowledged){
-                    Swal.fire({
-                        icon: 'success',
-                        text: 'Payment successfully',
-                      })
-                }
-            })
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertResult.acknowledged) {
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Payment successfully',
+                        })
+                    }
+                })
         }
 
 

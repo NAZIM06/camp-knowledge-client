@@ -1,61 +1,61 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 
 const ManageClasses = () => {
-        const [modal, setModal] = useState(false)
-        const [selectedClassId, setSelectedClassId] = useState(null);
-        
-        const { data: allClasses = [], refetch } = useQuery({
-            queryKey: ['classes'],
-            queryFn: async () => {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/all-classes`);
-                return response.data;
-            },
-        });
-    
-        const handleUpdate = (id, status) => {
-            fetch(`${import.meta.env.VITE_BASE_URL}/all-classes/${id}?status=${status}`, {
-                method: 'PUT'
+    const [modal, setModal] = useState(false)
+    const [selectedClassId, setSelectedClassId] = useState(null);
+
+    const { data: allClasses = [], refetch } = useQuery({
+        queryKey: ['classes'],
+        queryFn: async () => {
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/all-classes`);
+            return response.data;
+        },
+    });
+
+    const handleUpdate = (id, status) => {
+        fetch(`${import.meta.env.VITE_BASE_URL}/all-classes/${id}?status=${status}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                console.log(data)
             })
-                .then(res => res.json())
-                .then(data => {
-                    refetch()
-                    console.log(data)
-                })
-        }
-        const handleModal = (id) => {
-            setSelectedClassId(id)
-            setModal(true)
-    
-        }
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            const feedback = event.target.feedback.value;
-            const id = selectedClassId; // Access the selected class ID
-            axios.put(`${import.meta.env.VITE_BASE_URL}/all-classes/${id}?feedback=${feedback}`)
-                .then((res) => {
-                    console.log(res.data);
-                });
-            setModal(false);
-        };    
+    }
+    const handleModal = (id) => {
+        setSelectedClassId(id)
+        setModal(true)
+
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const feedback = event.target.feedback.value;
+        const id = selectedClassId; // Access the selected class ID
+        axios.put(`${import.meta.env.VITE_BASE_URL}/all-classes/${id}?feedback=${feedback}`)
+            .then((res) => {
+                console.log(res.data);
+            });
+        setModal(false);
+    };
 
     return (
         <>
             {
-                modal &&  <dialog className="modal modal-bottom sm:modal-middle" open>
-                <form onSubmit={handleSubmit} method="dialog" className="modal-box">
-                    <h3 className="font-bold text-lg">Feedback</h3>
-                    <div className="form-control mt-3">
-                    <textarea placeholder="Feedback" name='feedback' className="textarea textarea-bordered textarea-md w-full focus:outline-none" ></textarea>
-                    </div>
-                    <div className="modal-action">
-                        <button type='submit' className="btn">
-                            submit
-                        </button>
-                    </div>
-                </form>
-            </dialog>
+                modal && <dialog className="modal modal-bottom sm:modal-middle" open>
+                    <form onSubmit={handleSubmit} method="dialog" className="modal-box">
+                        <h3 className="font-bold text-lg">Feedback</h3>
+                        <div className="form-control mt-3">
+                            <textarea placeholder="Feedback" name='feedback' className="textarea textarea-bordered textarea-md w-full focus:outline-none" ></textarea>
+                        </div>
+                        <div className="modal-action">
+                            <button type='submit' className="btn">
+                                submit
+                            </button>
+                        </div>
+                    </form>
+                </dialog>
             }
             <div className='w-11/12 py-10 px-5 bg-base-300 shadow-2xl my-10'>
                 <p className='text-3xl font-bold my-5 text-center'>All Classes: {allClasses.length}</p>
@@ -86,7 +86,7 @@ const ManageClasses = () => {
                                     <td>{classes.instructorEmail}</td>
                                     <td>{classes.price}</td>
                                     <td>{classes.seats}</td>
-                                    <td><button onClick={()=>handleModal(classes._id)} className='button'>Feedback</button></td>
+                                    <td><button onClick={() => handleModal(classes._id)} className='button'>Feedback</button></td>
                                     {
                                         classes.status === 'Pending' && <td><div className='text-sm p-3 rounded-full flex justify-center items-center border-2 border-yellow-600 font-semibold'>{classes.status}</div></td>
                                     }

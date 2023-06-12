@@ -5,14 +5,14 @@ import PopularInstructors from './PopularInstructors/PopularInstructors';
 import PopularClasses from './PopularClasses/PopularClasses';
 
 const Home = () => {
-    return (
-        <div className='py-6'>
-          <Banner></Banner>
-          <div className='py-20'><PopularInstructors/></div>
-          <PopularClasses/>
-          <AboutUs></AboutUs>
-        </div>
-    );
+  return (
+    <div className='py-6'>
+      <Banner></Banner>
+      <div className='py-20'><PopularInstructors /></div>
+      <PopularClasses />
+      <AboutUs></AboutUs>
+    </div>
+  );
 };
 
 export default Home;

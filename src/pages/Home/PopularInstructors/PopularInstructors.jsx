@@ -19,14 +19,14 @@ const PopularInstructors = () => {
             <div className='grid md:grid-cols-3 grid-cols-1 gap-5'>
                 {
                     instructors.slice(0, 6).map(instructor =>
-                      
-                            <div key={instructor._id} className="card w-80 glass shadow-2xl group">
-                                <figure><img className='h-64 w-full object-cover' src={instructor?.image} alt={instructor.name} /></figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">{instructor.name}</h2>
-                                    <p className='font-semibold'>Email: <span className='font-normal'>{instructor.email}</span></p>
-                                </div>
+
+                        <div key={instructor._id} className="card w-80 glass shadow-2xl group">
+                            <figure><img className='h-64 w-full object-cover' src={instructor?.image} alt={instructor.name} /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{instructor.name}</h2>
+                                <p className='font-semibold'>Email: <span className='font-normal'>{instructor.email}</span></p>
                             </div>
+                        </div>
                     )
                 }
             </div>

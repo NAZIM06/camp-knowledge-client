@@ -19,55 +19,55 @@ const Login = () => {
     const from = location.state?.form?.pathname || '/'
 
     const onSubmit = data => {
-        
+
         setError('')
 
         signInUser(data.email, data.password)
-        .then(result =>{
-            const user = result.user;
-            Swal.fire({
-                icon: 'success',
-                text: 'Login Successfully',
+            .then(result => {
+                const user = result.user;
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Login Successfully',
+                })
+                navigate(from, { replace: true });
+                setLoading(false)
+                reset()
             })
-            navigate(from, {replace : true});
-            setLoading(false)
-            reset()
-        })
-        .catch(err =>{
-            const errorMessage = err.message
-            if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
-                setError('Please Input a valid email address')
-                setLoading(false)
-            } else if (errorMessage === 'Firebase: Error (auth/wrong-password).'){
-                setError('wrong password. Please try again')
-                setLoading(false)
-            }
- console.log(errorMessage)
-        })
+            .catch(err => {
+                const errorMessage = err.message
+                if (errorMessage === 'Firebase: Error (auth/invalid-email).') {
+                    setError('Please Input a valid email address')
+                    setLoading(false)
+                } else if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
+                    setError('wrong password. Please try again')
+                    setLoading(false)
+                }
+                console.log(errorMessage)
+            })
     }
-        const handleGoogleSignIn = () =>{
-            googleSignInUser()
-            .then(result =>{
+    const handleGoogleSignIn = () => {
+        googleSignInUser()
+            .then(result => {
                 const user = result.user
-                const savedUser = {name: user.displayName ,email: user.email, image: user.photoURL, role: 'student'}
+                const savedUser = { name: user.displayName, email: user.email, image: user.photoURL, role: 'student' }
                 axios.post(`${import.meta.env.VITE_BASE_URL}/all-users`, savedUser)
                 setUser(user)
                 setLoading(false)
                 Swal.fire({
                     icon: 'success',
                     text: 'Login Successfully',
-                  })
-                navigate(from, {replace : true});
+                })
+                navigate(from, { replace: true });
             })
-            .catch(err =>{
-                if(err.message === 'Firebase: Error (auth/popup-closed-by-user).'){
+            .catch(err => {
+                if (err.message === 'Firebase: Error (auth/popup-closed-by-user).') {
                     setLoading(false)
                 }
                 console.log(err.message)
                 setLoading(false)
             })
-        }
-    
+    }
+
     return (
         <>
             {
