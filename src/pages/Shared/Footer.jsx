@@ -15,9 +15,8 @@ const Footer = () => {
           <p>Address: 49/2 CK Street,Dhaka City</p>
           <p>
             Important Links:{" "}
-            <Link to="/my-toys">Instractors</Link> |{" "}
-            <Link to="/all-toys">Classes</Link> |{" "}
-            <Link to="/blog">Dashboard</Link>
+            <Link to="/instructors">Instractors</Link> |{" "}
+            <Link to="/classes">Classes</Link> |{" "}
           </p>
         </div>
         <div>

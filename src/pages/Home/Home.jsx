@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div className='py-6'>
           <Banner></Banner>
-          <PopularInstructors/>
+          <div className='py-20'><PopularInstructors/></div>
           <PopularClasses/>
           <AboutUs></AboutUs>
         </div>

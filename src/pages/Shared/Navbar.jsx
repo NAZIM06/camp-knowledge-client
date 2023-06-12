@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <nav className="container mx-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 pt-5">
           <div className="flex items-center">
             <img
               src="https://i.ibb.co/1Jj7wZY/png-transparent-act-sat-reading-computer-icons-reading-child-text-reading-removebg-preview.png"

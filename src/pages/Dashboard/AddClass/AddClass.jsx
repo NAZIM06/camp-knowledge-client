@@ -69,7 +69,7 @@ const AddClass = () => {
                 <input type="text" name="price" placeholder='price' className='input input-bordered focus:outline-none' />
             </div>
         </div>
-        <button type='submit' className='btn btn-primary mt-5 w-full font-bold text-xl'>Add Class</button>
+        <button type='submit' className='button mx-auto flex justify-center w-full'>Add Class</button>
     </form>
     );
 };

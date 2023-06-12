@@ -20,9 +20,7 @@ const Dashboard = () => {
     },[])
 
     const theme = localStorage.getItem('theme')
-
-    // console.log(currentUser)
-
+    
     return (
         <div className="drawer lg:drawer-open mt-6">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

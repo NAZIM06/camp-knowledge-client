@@ -59,7 +59,7 @@ const PopularClasses = () => {
 
     return (
         <div className='px-6 md:px-10 mb-10 mx-auto w-11/12'>
-            <p className='text-3xl font-bold mb-10 text-center'>Popular Classes</p>
+            <p className='text-5xl font-extrabold mb-10 text-blue-900 text-center'>Popular Classes</p>
             <div className='grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-5'>
                 {classData.slice(0, 6).map((classes) =>
                     
@@ -71,7 +71,7 @@ const PopularClasses = () => {
                                 <p className='font-semibold'>Available Seats: <span className='font-normal'>{classes.seats}</span></p>
                                 <p className='font-semibold'>Enrolled Students: <span className='font-normal'>{classes?.enrolledStudents}</span></p>
                                 <p className='font-semibold'>Price: <span className='font-normal'>${classes.price}</span></p>
-                                <button onClick={() => handleSelect(classes)} className="btn btn-primary">Select</button>
+                                <button onClick={() => handleSelect(classes)} className="button mx-auto">Select</button>
                             </div>
                         </div>
                 )}
