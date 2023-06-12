@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     signOutUser()
-      .then(() => {})
+      .then(() => { })
       .catch(error => {
         const errorMessage = error.message;
         console.log(errorMessage);
@@ -63,7 +63,7 @@ const Navbar = () => {
               className="w-18 h-12"
             />
             <Link to="/" className="text-blue-900 text-4xl font-bold">
-              CampKnowledge
+              Camp <br /> Knowledge
             </Link>
           </div>
 

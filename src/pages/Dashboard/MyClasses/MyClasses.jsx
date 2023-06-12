@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
-import { FaPenAlt, FaPencilAlt } from 'react-icons/fa';
+import { FaPencilAlt } from 'react-icons/fa';
 import { useAuth } from '../../../components/Hooks/useAuth';
+
 
 const MyClasses = () => {
     const {user} = useAuth()
@@ -13,7 +14,7 @@ const MyClasses = () => {
             return response.data
         }
     })
-    // console.log(allClasses)
+    
     return (
         <div className='w-11/12 py-10 px-5 bg-base-300 shadow-2xl my-10'>
             <p className='text-3xl font-bold my-5 text-center'>My Classes : {allClasses.length}</p>

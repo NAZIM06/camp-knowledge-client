@@ -42,8 +42,7 @@ const Login = () => {
                 setError('wrong password. Please try again')
                 setLoading(false)
             }
-
-            console.log(errorMessage)
+ console.log(errorMessage)
         })
     }
         const handleGoogleSignIn = () =>{

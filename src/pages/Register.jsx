@@ -57,7 +57,7 @@ const handleGoogleSignIn = () => {
                 createUser(email, password)
                 .then((result) => {
                     const user = result.user;
-                    updateUserProfile(name, imageUrl)
+                    updateUser(name, imageUrl)
                         .then(() => {
                             Swal.fire({
                                 icon: 'success',
@@ -92,17 +92,16 @@ const handleGoogleSignIn = () => {
 
     return (
         <>
+            <div className='mx-auto p-10 w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-3/6'>
             {
                 loading && <Loader />
             }
-            <div className='mx-auto p-10 w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-3/6'>
             <form className='p-10 bg-base-200 rounded-xl border-2' onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col mb-4">
             <label className='text-xl font-semibold mb-3 text-black'>Name</label>
                     <input placeholder='Name' className='mb-5 p-3 focus:outline-none' {...register('name', {required:true})} />
                     {errors?.name?.types === 'required' && <p className='text-red-800 mb-2'>Name is required</p>}
                     <label className='text-xl font-semibold mb-3'>Email</label>
-                    <label className='text-xl font-semibold mb-3 text-black'>Email</label>
                     <input placeholder='Email' className='mb-5 p-3 focus:outline-none' {...register('email', { required: true })} />
                     {errors?.email?.types === 'required' && <p className='text-red-800 mb-2'>Email is required</p>}
                     </div>

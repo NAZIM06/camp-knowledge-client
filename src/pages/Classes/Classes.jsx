@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import { Helmet } from 'react-helmet';
 import { useAuth } from '../../components/Hooks/useAuth';
+
 
 
 const Classes = () => {
@@ -43,19 +43,17 @@ const Classes = () => {
                         text: 'Class selected successfully',
                     })
                 }
-                // console.log(res.data)
+            
             })
     }
     return (
         <>
-        <Helmet>
-            <title>MindFulness || All Classes</title>
-        </Helmet>
+      
         <div className='md:p-10 my-10 mx-auto w-11/12'>
             <p className='text-3xl font-bold mb-10 text-center'>All Classes</p>
             <div className='grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-5'>
                 {allClasses.map((classes) =>
-               
+              
 
                     <div key={classes._id} className={`card w-96 group glass ${classes.seats === 0 && 'bg-red-600'}`}>
                         <figure><img className='w-full h-80 group-hover:scale-110' src={classes.image} alt="car!" /></figure>
@@ -67,7 +65,6 @@ const Classes = () => {
                             <button disabled={classes.seats === 0 ? 'disabled' : currentUser.role === 'admin' || currentUser.role === 'instructor' ? 'disabled' : ''} onClick={() => handleSelect(classes)} className="btn btn-primary">Select</button>
                         </div>
                     </div>
-                
                     )}
             </div>
         </div>
