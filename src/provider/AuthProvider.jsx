@@ -1,11 +1,9 @@
-import  { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../Firebase.config';
 import axios from 'axios';
 
-
-
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -30,32 +28,32 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     };
-    const updateUser = ( name, photo) =>{
+    const updateUser = (name, photo) => {
         setLoading(true)
         return updateProfile(auth.currentUser, {
-            displayName : name,
+            displayName: name,
             photoURL: photo
         })
     };
-    
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 try {
-                  const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/jwt`, { email: currentUser.email });
-                  const token = response.data.token;
-                  localStorage.setItem('access-token', token);
-                  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Add this line to set the authorization header
+                    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/jwt`, { email: currentUser.email });
+                    const token = response.data.token;
+                    localStorage.setItem('access-token', token);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Add this line to set the authorization header
                 } catch (error) {
-                  console.log('Failed to obtain JWT token:', error);
+                    console.log('Failed to obtain JWT token:', error);
                 }
-              } else {
+            } else {
                 // signOutUser()
                 // .then(()=>{})
                 localStorage.removeItem('access-token');
                 delete axios.defaults.headers.common['Authorization']; // Remove the authorization header
-              }
-              
+            }
+
             setUser(currentUser);
             setLoading(false);
         });
