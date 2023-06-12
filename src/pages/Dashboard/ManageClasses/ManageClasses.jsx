@@ -62,7 +62,7 @@ const ManageClasses = () => {
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
-                        <thead className='bg-slate-600 text-white'>
+                        <thead className='bg-red-600 text-white'>
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
@@ -86,7 +86,7 @@ const ManageClasses = () => {
                                     <td>{classes.instructorEmail}</td>
                                     <td>{classes.price}</td>
                                     <td>{classes.seats}</td>
-                                    <td><button onClick={()=>handleModal(classes._id)} className='btn btn-primary'>Feedback</button></td>
+                                    <td><button onClick={()=>handleModal(classes._id)} className='button'>Feedback</button></td>
                                     {
                                         classes.status === 'Pending' && <td><div className='text-sm p-3 rounded-full flex justify-center items-center border-2 border-yellow-600 font-semibold'>{classes.status}</div></td>
                                     }
@@ -96,7 +96,7 @@ const ManageClasses = () => {
                                     {
                                         classes.status === 'Denied' && <td><div className='text-sm p-3 rounded-full flex justify-center items-center border-2 border-red-800 font-semibold'>{classes.status}</div></td>
                                     }
-                                    <td><div className='flex justify-between'><button disabled={classes.status === 'Approved' || classes.status == 'Denied'} onClick={() => handleUpdate(classes._id, 'approved')} className='btn btn-success'>Approve</button><button disabled={classes.status === 'Approved' || classes.status == 'Denied'} onClick={() => handleUpdate(classes._id, 'denied')} className='btn btn-error'>Denied</button></div></td>
+                                    <td><div className='flex justify-between'><button disabled={classes.status === 'Approved' || classes.status == 'Denied'} onClick={() => handleUpdate(classes._id, 'approved')} className='button'>Approve</button><button disabled={classes.status === 'Approved' || classes.status == 'Denied'} onClick={() => handleUpdate(classes._id, 'denied')} className='btn btn-error'>Denied</button></div></td>
                                 </tr>)}
 
                         </tbody>

@@ -33,7 +33,7 @@ const ManageUsers = () => {
         <div className="overflow-x-auto">
             <table className="table">
                 {/* head */}
-                <thead className='bg-slate-600 text-white'>
+                <thead className='bg-red-600 text-white'>
                     <tr>
                         <th>#</th>
                         <th>Name</th>

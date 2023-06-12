@@ -1,12 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
 import { FaPencilAlt } from 'react-icons/fa';
 import { useAuth } from '../../../components/Hooks/useAuth';
 
 
 const MyClasses = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
     const { data: allClasses = [] } = useQuery({
         queryKey: ['my-classes'],
         queryFn: async () => {
@@ -14,14 +13,14 @@ const MyClasses = () => {
             return response.data
         }
     })
-    
+
     return (
         <div className='w-11/12 py-10 px-5 bg-base-300 shadow-2xl my-10'>
             <p className='text-3xl font-bold my-5 text-center'>My Classes : {allClasses.length}</p>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
-                    <thead className='bg-slate-600 text-white'>
+                    <thead className='bg-red-600 text-white'>
                         <tr>
                             <th>#</th>
                             <th>Image</th>
@@ -53,7 +52,7 @@ const MyClasses = () => {
                                 {
                                     classes.status === 'Denied' && <td><div className='text-sm p-3 rounded-full flex justify-center items-center border-2 border-red-800 font-semibold'>{classes.status}</div></td>
                                 }
-                                <td><div className='bg-slate-700 p-3 rounded-lg text-white flex justify-center cursor-pointer'><FaPencilAlt className='w-5 h-5'/></div></td>
+                                <td><div className='button cursor-pointer'><FaPencilAlt className='w-5 h-5' /></div></td>
                             </tr>)}
 
                     </tbody>

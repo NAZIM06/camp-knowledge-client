@@ -36,7 +36,7 @@ const MySelectedClasses = () => {
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
-                        <thead className='bg-slate-600 text-white'>
+                        <thead className='bg-red-600 text-white'>
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
@@ -56,7 +56,7 @@ const MySelectedClasses = () => {
                                     <td>{classes?.singleClass?.instructorName}</td>
                                     <td>{classes?.singleClass?.seats}</td>
                                     <td>{classes?.singleClass?.price}</td>
-                                    <td className='flex justify-between'><button onClick={() => handleDelete(classes?._id)} className='btn btn-error'>Delete</button><Link to={`/dashboard/payment/${classes?._id}`}><button className='btn btn-success'>pay</button></Link></td>
+                                    <td className='flex justify-between'><button onClick={() => handleDelete(classes?._id)} className='inline-flex items-center h-12 px-6 my-3 font-medium text-white bg-red-500 hover:bg-red-600'>Delete</button><Link to={`/dashboard/payment/${classes?._id}`}><button className='button'>pay</button></Link></td>
                                 </tr>)}
                         </tbody>
                     </table>
