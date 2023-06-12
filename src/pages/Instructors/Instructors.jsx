@@ -16,7 +16,7 @@ const Instructors = () => {
             <Helmet>
                 <title>CampKnowledge || Instructors</title>
             </Helmet>
-            <div className='w-full flex justify-center'>
+            <div className='w-full flex justify-center mb-5'>
                 <div className='max-w-screen-lg'>
                     <p className='mb-12 text-2xl text-center font-bold'>All Instructors</p>
                     <div className='grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-5 mx-auto'>
