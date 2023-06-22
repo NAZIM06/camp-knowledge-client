@@ -15,7 +15,7 @@ const MyEnrolledClasses = () => {
     return (
         <>
             <div className='w-11/12 py-10 px-5 bg-base-300 shadow-2xl my-10'>
-                <p className='text-3xl font-bold my-5 text-center'>My Enrolled Classes : {enrolledClasses.length}</p>
+                <p className='text-3xl font-bold my-5 text-center'>Enrolled Classes : {enrolledClasses.length}</p>
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}

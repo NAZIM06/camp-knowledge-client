@@ -20,7 +20,7 @@ const PopularInstructors = () => {
                 {
                     instructors.slice(0, 6).map(instructor =>
 
-                        <div key={instructor._id} className="card w-80 glass shadow-2xl group">
+                        <div key={instructor._id} className="card w-full sm:w-80 glass shadow-2xl group">
                             <figure><img className='h-64 w-full object-cover' src={instructor?.image} alt={instructor.name} /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{instructor.name}</h2>

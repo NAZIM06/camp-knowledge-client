@@ -48,8 +48,6 @@ const AuthProvider = ({ children }) => {
                     console.log('Failed to obtain JWT token:', error);
                 }
             } else {
-                // signOutUser()
-                // .then(()=>{})
                 localStorage.removeItem('access-token');
                 delete axios.defaults.headers.common['Authorization']; // Remove the authorization header
             }
